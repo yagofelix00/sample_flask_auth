@@ -1,12 +1,16 @@
 from flask import Flask, request, jsonify
 from models.user import User
 from database import db
+from flask_login import LoginManager
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 
+Login_manager = LoginManager()
 db.init_app(app)
+Login_manager.init_app(app)
+
 @app.route('/login', methods="POST")
 def login():
     data = request.json 
@@ -15,7 +19,10 @@ def login():
 
     if username and password:
         # Login
-        pass
+        user = User.query.filter_by(username=username).first()
+
+        if user and user.password == password:
+                return jsonify({"message": "Autentificação realizadfa com sucesso!"}), 200
 
     return jsonify({"message": "Credenciais Inválidas"}), 400
 
