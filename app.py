@@ -29,7 +29,7 @@ def login():
         if user and user.password == password:
                 login_user(user)
                 print(current_user.is_authenticated)
-                return jsonify({"message": "Autentificação realizada com sucesso!"}), 200
+                return jsonify({"message": "Autentificação realizada com sucesso!"})
 
     return jsonify({"message": "Credenciais Inválidas"}), 400
 
@@ -40,8 +40,21 @@ def logout():
      logout_user()
      return jsonify({"message": "Logout realizado com sucesso!"})         
 
+@app.route('/user', methods=["POST"])
+@login_required
+def create_user():
+    data = request.json 
+    username = data.get("username")
+    password = data.get("password")
 
-
+    if username and password:
+        user = User(username=username, password=password)
+        db.session.add(user)
+        db.session.commit()
+        return jsonify({"message": "Usuario cadastrado com sucesso!"})
+    
+    return jsonify({"message": "Dados Inválidas"}), 400 
+   
 @app.route("/hello-world", methods=['GET'])
 def hello_world():
     return "Hello world"
