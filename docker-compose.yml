@@ -14,4 +14,4 @@ services:
     expose:
       - "3306"
     volumes:
-      - C:\Users\YAGO\OneDrive\Documentos\projeto\Flask-API\sample_flask_auth:/var/lib/mysql
+      - C:\Users\YAGO\OneDrive\Documentos\projeto\Flask-API\sample_flask_auth\mysql_data:/var/lib/mysql
