@@ -41,14 +41,13 @@ def logout():
     return jsonify({"message": "Logout realizado com sucesso!"})         
 
 @app.route('/user', methods=["POST"])
-@login_required
 def create_user():
     data = request.json 
     username = data.get("username")
     password = data.get("password")
 
     if username and password:
-        user = User(username=username, password=password)
+        user = User(username=username, password=password, role='user')
         db.session.add(user)
         db.session.commit()
         return jsonify({"message": "Usuario cadastrado com sucesso!"})
@@ -71,6 +70,9 @@ def update_user(id_user):
     data = request.json
     user = User.query.get(id_user)
 
+    if id_user != current_user.id and current_user.role == "user":
+         return jsonify({"message": "Operação não permitida"}), 403
+    
     if user and data.get("password"): 
          user.password = data.get("password")
          db.session.commit()
@@ -82,8 +84,11 @@ def update_user(id_user):
 @app.route('/user/<int:id_user>', methods=["DELETE"])
 @login_required
 def delete_user(id_user):
-    data = request.json
     user = User.query.get(id_user)
+
+    if current_user.role != 'admin':
+         return jsonify({"message": "Operação não permitida"}), 403
+    
     if id_user == current_user.id: 
          return jsonify({"message": "Deleção não permitida"}), 403
 
@@ -94,10 +99,6 @@ def delete_user(id_user):
     
     return jsonify({"message": "Usuario não encontrado"}), 404
 
-
-@app.route("/hello-world", methods=['GET'])
-def hello_world():
-    return "Hello world"
 
 if __name__ == '__main__':
     app.run(debug=True)
