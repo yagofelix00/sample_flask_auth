@@ -27,7 +27,7 @@ def login():
         # Login
         user = User.query.filter_by(username=username).first()
 
-        if user and user.password == password:
+        if user and bcrypt.checkpw(str.encode(password), str.encode(user.password)):
                 login_user(user)
                 print(current_user.is_authenticated)
                 return jsonify({"message": "Autentificação realizada com sucesso!"})
@@ -49,7 +49,7 @@ def create_user():
 
     if username and password:
         hashed_password = bcrypt.hashpw(str.encode(password), bcrypt.gensalt())
-        user = User(username=username, password=password, role='user')
+        user = User(username=username, password=hashed_password, role='user')
         db.session.add(user)
         db.session.commit()
         return jsonify({"message": "Usuario cadastrado com sucesso!"})
