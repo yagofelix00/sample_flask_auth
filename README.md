@@ -17,8 +17,6 @@ It serves as a base template for applications that require secure user managemen
 
 ## 🚀 2. Features
 
-## 🚀 2. Features
-
 ### 🔑 Authentication
 
 - Login with username + password
@@ -174,8 +172,11 @@ By centralizing authentication logic, teams can:
 ## 👨‍💻 10. Author
 
 **Yago Félix**
-Junior Python Backend Developer
-GitHub: [https://github.com/yagofelix00](https://github.com/yagofelix00)
+
+💼 Desenvolvedor Python — Back-end | Análise de Dados | Full Stack  
+🔍 Focado na criação de soluções automatizadas, pipelines de dados e aplicações robustas usando Python.  
+📊 Interessado em Análise de Dados, SQL, processos ETL, APIs, Automação Web e desenvolvimento full-stack com Python.  
+🔗 Portfólio & GitHub: https://github.com/yagofelix00
 
 ---
 
