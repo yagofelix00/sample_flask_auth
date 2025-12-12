@@ -17,27 +17,47 @@ It serves as a base template for applications that require secure user managemen
 
 ## 🚀 2. Features
 
-### 🔑 Authentication
-- User login with bcrypt password validation  
-- Logout and session cleanup  
-- Authentication handled via **Flask-Login**
+## 🚀 2. Features
 
-### 👤 User Management
-- Create users  
-- Get user by ID  
-- Update password  
-- Delete users  
+### 🔑 Authentication
+
+- Login with username + password
+
+- Password hashing and validation using bcrypt
+
+- Session management with Flask-Login
+
+- Logout and session cleanup
+
+### 👤 User Management (CRUD)
+
+- Create new users
+
+- Read user info by ID
+
+- Update user password
+
+- Delete users (admin only)
 
 ### 🔐 Role-Based Access Control
-- Each user has a role (`user` or `admin`)  
-- Normal users cannot update/delete other accounts  
-- Only admins can delete users  
-- Users cannot delete themselves  
 
-### 🛡 Security
-- Passwords stored as bcrypt hashes  
-- Protected routes using `@login_required`  
-- Session-based authentication  
+- Each user has a role: user or admin
+
+- Users cannot update or delete other accounts
+
+- Only admin can delete users
+
+- Prevention of self-deletion for safety
+
+### 🛡️ Security
+
+- Passwords stored as bcrypt hashes
+
+- Auth-protected endpoints using @login_required
+
+- Session-based authentication (secure cookies)
+
+- Restricted admin-only operations
 
 ---
 
